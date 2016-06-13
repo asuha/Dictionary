@@ -2,22 +2,22 @@ import java.util.ArrayList;
 
 public class Node {
 
-    private Node rigth;
-    private Node left;
-    private Node father;
-    private String key;
-    private ArrayList<String> values;
     private int balance;
+    private String key;
+    private Node father;
+    private Node left;
+    private Node rigth;
+    private ArrayList<String> values;
 
     public Node(String key, String value){
         this.values = new ArrayList<String>();
 
         addValue(value);
         setBalance(0);
-        setFather(null);
         setKey(key);
+        setFather(null);
         setLeft(null);
-        setRigth(null);
+        setRight(null);
     }
 
     public void addValue(String value){
@@ -28,19 +28,19 @@ public class Node {
         return this.balance;
     }
 
-    public Node getFather(){
-        return this.father;
-    }
-
     public String getKey(){
         return this.key;
+    }
+
+    public Node getFather(){
+        return this.father;
     }
 
     public Node getLeft(){
         return this.left;
     }
 
-    public Node getRigth(){
+    public Node getRight(){
         return this.rigth;
     }
 
@@ -48,19 +48,19 @@ public class Node {
         this.balance = balance;
     }
 
-    public void setFather(Node father){
-        this.father = father;
-    }
-
     public void setKey(String key){
         this.key = key;
+    }
+
+    public void setFather(Node father){
+        this.father = father;
     }
 
     public void setLeft(Node left){
         this.left = left;
     }
 
-    public void setRigth(Node rigth){
+    public void setRight(Node rigth){
         this.rigth = rigth;
     }
 }
