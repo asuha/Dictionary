@@ -6,22 +6,13 @@ public class Node {
     private String key;
     private Node father;
     private Node left;
-    private Node rigth;
+    private Node right;
+
     private ArrayList<String> values;
 
-    public Node(String key, String value){
-        this.values = new ArrayList<String>();
-
-        addValue(value);
-        setBalance(0);
-        setKey(key);
-        setFather(null);
-        setLeft(null);
-        setRight(null);
-    }
-
-    public void addValue(String value){
-        this.values.add(value);
+    public Node(String key, ArrayList<String> values){
+        setInitialValues(key);
+        setValues(values);
     }
 
     public int getBalance(){
@@ -41,7 +32,11 @@ public class Node {
     }
 
     public Node getRight(){
-        return this.rigth;
+        return this.right;
+    }
+
+    public ArrayList<String> getValues() {
+        return values;
     }
 
     public void setBalance(int balance){
@@ -60,7 +55,21 @@ public class Node {
         this.left = left;
     }
 
-    public void setRight(Node rigth){
-        this.rigth = rigth;
+    public void setRight(Node right){
+        this.right = right;
     }
+
+    public void setValues(ArrayList<String> values) {
+        this.values = values;
+    }
+
+    private void setInitialValues(String key){
+        setValues( new ArrayList<String>() );
+        setBalance(0);
+        setKey(key);
+        setFather(null);
+        setLeft(null);
+        setRight(null);
+    }
+
 }

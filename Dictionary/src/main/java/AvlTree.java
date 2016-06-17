@@ -1,23 +1,37 @@
+import java.util.ArrayList;
+
 public class AVLTree {
 
     private Node root;
 
 
-    public Node getRoot(){
-        return this.root;
-    }
-
-
-    public boolean insert(String key, String value){
+    public Node insert(String key, ArrayList<String> value){
         Node insert = new Node(key, value);
-        return insert(getRoot(), insert);
+        insert(getRoot(), insert);
+
+        return insert;
     }
 
 
-    public void setRoot(Node root){
-        this.root = root;
+    public ArrayList<String> searchNode(String key){
+        return searchNode(getRoot(), key);
     }
 
+    private ArrayList<String> searchNode(Node initialNode, String key){
+
+        if ( initialNode == null || key == null )
+            return null;
+
+        if (initialNode.getKey().equals(key))
+            return initialNode.getValues();
+
+        else if ( initialNode.getKey().compareToIgnoreCase( key ) > 0 )
+            return searchNode( initialNode.getLeft(), key );
+
+
+        return searchNode( initialNode.getRight(), key );
+
+    }
 
     private int height(Node actual) {
         if (actual == null) {
@@ -39,23 +53,22 @@ public class AVLTree {
 
     private void checkBalance(Node actual){
         setBalance(actual);
-        int balance = actual.getBalance();
 
-        if (balance == -2){
+        if (actual.getBalance() == -2){
 
-            if ( height(actual.getLeft().getLeft()) >= height(actual.getRight().getRight()) )
-                actual = rightRotation(actual);
-
-            else
-                actual = doubleRotationLeftRigth(actual);
-
-        } else if (balance == 2){
-
-            if ( height(actual.getRight().getRight()) >= height(actual.getRight().getLeft()) )
-                actual = leftRotation(actual);
+            if (actual.getRight().getBalance() < 0)
+                leftRotation(actual);
 
             else
-                actual = doubleRotationRigthLeft(actual);
+                doubleRotationLeft(actual);
+
+        } else if (actual.getBalance() == 2){
+
+            if (actual.getLeft().getBalance() > 0)
+                rightRotation(actual);
+
+            else
+                doubleRotationRight(actual);
 
         }
 
@@ -68,11 +81,10 @@ public class AVLTree {
     }
 
 
-    private boolean insert(Node actual, Node insert){
+    private void insert(Node actual, Node insert){
 
         if (actual == null){
-            actual = insert;
-            return true;
+             setRoot(insert);
 
         } else {
 
@@ -85,7 +97,7 @@ public class AVLTree {
                 } else
                     insert(actual.getLeft(), insert);
 
-            } else if (actual.getKey().compareTo(insert.getKey()) > 0) {
+            } else if (insert.getKey().compareTo(actual.getKey()) > 0) {
 
                 if ( actual.getRight() == null){
                     actual.setRight(insert);
@@ -97,8 +109,6 @@ public class AVLTree {
             }
 
         }
-
-        return false;
 
     }
 
@@ -135,41 +145,41 @@ public class AVLTree {
 
     private Node leftRotation(Node actual){
 
-        Node rigthNode = actual.getRight();
-        rigthNode.setFather(actual.getFather());
+        Node rightNode = actual.getRight();
+        rightNode.setFather(actual.getFather());
 
-        actual.setRight(rigthNode.getLeft());
+        actual.setRight(rightNode.getLeft());
 
         if (actual.getRight() != null)
             actual.getRight().setFather(actual);
 
-        rigthNode.setLeft(actual);
-        actual.setFather(rigthNode);
+        rightNode.setLeft(actual);
+        actual.setFather(rightNode);
 
-        if (rigthNode.getFather() != null){
+        if (rightNode.getFather() != null){
 
-            if (rigthNode.getFather().getRight() == actual)
-                rigthNode.getFather().setRight(rigthNode);
+            if (rightNode.getFather().getRight() == actual)
+                rightNode.getFather().setRight(rightNode);
 
-            else if ( rigthNode.getFather().getLeft() == actual)
-                rigthNode.getFather().setLeft(rigthNode);
+            else if ( rightNode.getFather().getLeft() == actual)
+                rightNode.getFather().setLeft(rightNode);
 
         }
 
         setBalance(actual);
-        setBalance(rigthNode);
+        setBalance(rightNode);
 
-        return rigthNode;
+        return rightNode;
     }
 
 
-    private Node doubleRotationLeftRigth(Node node){
+    private Node doubleRotationRight(Node node){
         node.setLeft(leftRotation(node.getLeft()));
         return rightRotation(node);
     }
 
 
-    private Node doubleRotationRigthLeft(Node node){
+    private Node doubleRotationLeft(Node node){
         node.setRight(leftRotation(node.getRight()));
         return leftRotation(node);
     }
@@ -177,5 +187,15 @@ public class AVLTree {
 
     private void setBalance(Node node){
         node.setBalance(height(node.getLeft()) - height(node.getRight()));
+     }
+
+
+    public Node getRoot(){
+        return this.root;
+    }
+
+
+    protected void setRoot(Node root){
+        this.root = root;
     }
 }
