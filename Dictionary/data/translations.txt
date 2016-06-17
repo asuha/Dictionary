@@ -2,3 +2,6 @@ Test#Teste
 Thanks#Muito Obrigado#Muito Obrigada
 WordTest#WQA#WAS
 AAA#Muito Obrigado#Muito Obrigada
+Open#Abrir#Aberto
+Banana#Banana
+Big#Grande#Gigante
