@@ -1,25 +1,29 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         Translator translator = new Translator();
 
-        ArrayList<String> words = translator.translateWord("Test");
-        ArrayList<String> newWords = new ArrayList<String>();
-        newWords.add("Muito Obrigado");
-        newWords.add("Muito Obrigada");
-        translator.insertTranslation("Thanks",newWords);
-        ArrayList<String> newInsert = new ArrayList<String>();
-        newInsert.add("WQA");
-        newInsert.add("WAS");
-        translator.insertTranslation("WordTest",newInsert);
+        System.out.println("Enter the word in want to translate: ");
+        try{
+            BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
+            ArrayList<String> words = translator.translateWord(bufferRead.readLine());
 
-        ArrayList<String> newInsert1 = new ArrayList<String>();
-        newInsert1.add("Muito Obrigado");
-        newInsert1.add("Muito Obrigada");
-        translator.insertTranslation("AAA",newInsert1);
+            if (words.isEmpty())
+                System.out.println("Searched word was not found in Dictionary, do you want to insert it?");
+
+            else
+                for (String word: words)
+                    System.out.println(word);
+        }
+        catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
     }
-
 }

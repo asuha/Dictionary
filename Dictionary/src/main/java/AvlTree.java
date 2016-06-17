@@ -20,7 +20,7 @@ public class AVLTree {
     private ArrayList<String> searchNode(Node initialNode, String key){
 
         if ( initialNode == null || key == null )
-            return null;
+            return new ArrayList<String>();
 
         if (initialNode.getKey().equals(key))
             return initialNode.getValues();
