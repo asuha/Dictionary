@@ -1,18 +1,24 @@
 import java.util.ArrayList;
 
+//Classe que armazenará informações de cada nó da árvore
 public class Node {
 
     private int balance;
-    private String key;
     private Node father;
     private Node left;
     private Node right;
-
+    //Palavra chave - Inglês
+    private String key;
+    //Lista com traduções
     private ArrayList<String> values;
 
     public Node(String key, ArrayList<String> values){
-        setInitialValues(key);
-        setValues(values);
+        setValues( new ArrayList<String>() );
+        setBalance(0);
+        setKey(key);
+        setFather(null);
+        setLeft(null);
+        setRight(null);
     }
 
     public int getBalance(){
@@ -61,15 +67,6 @@ public class Node {
 
     public void setValues(ArrayList<String> values) {
         this.values = values;
-    }
-
-    private void setInitialValues(String key){
-        setValues( new ArrayList<String>() );
-        setBalance(0);
-        setKey(key);
-        setFather(null);
-        setLeft(null);
-        setRight(null);
     }
 
 }

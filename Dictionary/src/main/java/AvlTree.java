@@ -1,34 +1,40 @@
 import java.util.ArrayList;
-
+//Árvore AVL
 public class AVLTree {
 
+    //Nó raiz
     private Node root;
 
-
+    //Insere nó com palavra chave e traduções e retorna o nó inserido
     public Node insert(String key, ArrayList<String> value){
         Node insert = new Node(key, value);
+        //Faz a chamada do método recursivo e privado de inserção
         insert(getRoot(), insert);
 
         return insert;
     }
 
-
+    //Busca nó pela palavra chave e retorna lista com valores da árvore se os mesmos existirem
+    //Caso a palavra não exista na árvore uma lista vazia será retornada
     public ArrayList<String> searchNode(String key){
+        //Faz a chamada do método recursivo de busca
         return searchNode(getRoot(), key);
     }
 
+    //Busca recursivamente pelo nó na árvore
     private ArrayList<String> searchNode(Node initialNode, String key){
-
+        //Se o valor não for encontrado ou a chave passada for nula é retornado uma lista vazia
         if ( initialNode == null || key == null )
             return new ArrayList<String>();
-
+        //Verifica se o nó atual é o nó buscado
         if (initialNode.getKey().equals(key))
             return initialNode.getValues();
-
+        //Verifica se a chave do nó buscado é menor que a do nó atual
         else if ( initialNode.getKey().compareToIgnoreCase( key ) > 0 )
+            //Chamada recursiva para verifica se o nó da esquerda é o nó buscado
             return searchNode( initialNode.getLeft(), key );
 
-
+        //Chamada recursiva para verificar se o nó da direita é o nó buscado
         return searchNode( initialNode.getRight(), key );
 
     }

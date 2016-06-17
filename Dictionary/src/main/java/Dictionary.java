@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+//Classe de dicionário para armazenar informações de palavras e chaves
 public class Dictionary {
     private String word;
     private ArrayList<String> definitions;

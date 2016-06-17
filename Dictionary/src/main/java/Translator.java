@@ -11,7 +11,7 @@ public class Translator {
         getFile().loadFile();
         loadDictionary();
     }
-
+    //Prepara os dados para inserção
     private Dictionary prepareData(String line){
         if ( line != null) {
 
@@ -26,6 +26,7 @@ public class Translator {
         return null;
     }
 
+    //Carrega as informações na árvore
     private void loadDictionary(){
         String line;
         try {
@@ -41,10 +42,12 @@ public class Translator {
 
     }
 
+    //Busca na árvore e retorna as traduções para palavra informada
     public ArrayList<String> translateWord(String word){
         return getTree().searchNode(word);
     }
 
+    //Insere na árvore uma nova tradução e salva no arquivo
     public void insertTranslation(String key, ArrayList<String> translations){
         Node node = getTree().insert(key, translations);
         getFile().generateNewLine(node.getKey(), node.getValues());

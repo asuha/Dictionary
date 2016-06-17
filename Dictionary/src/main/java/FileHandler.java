@@ -1,12 +1,13 @@
 import java.io.*;
 import java.util.ArrayList;
 
+//Classe que lida com o arquivo
 public class FileHandler {
     private static final String filePath = "data/translations.txt";
     private BufferedReader reader;
     private FileInputStream inputFile;
 
-
+    //Adiciona nova linha ao arquivo
     private void appendLine(String line){
         BufferedWriter writer = initializeWriter();
 
@@ -26,12 +27,12 @@ public class FileHandler {
 
     }
 
-
+    //Inicializa o reader
     private void initializeReader(){
         setReader( new BufferedReader( new InputStreamReader( getInputFile() ) ) );
     }
 
-
+    //Inicializa o writer
     private BufferedWriter initializeWriter(){
 
         try {
@@ -46,7 +47,7 @@ public class FileHandler {
         return null;
     }
 
-
+    //Carrega o arquivo
     public void loadFile(){
 
         try {
@@ -59,7 +60,7 @@ public class FileHandler {
         }
     }
 
-
+    //Gera uma nova linha para ser inserida no arquivo
     public void generateNewLine(String key, ArrayList<String> values){
         String line = key;
 
